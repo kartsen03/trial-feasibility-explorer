@@ -1,0 +1,92 @@
+name: Refresh data
+
+# The whole pipeline against the live API: extract, build, validate, regenerate the
+# README findings, publish a new data release, and push a branch that points the app at
+# it. Merging that branch deploys the new snapshot, so data changes are reviewed like
+# code changes.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Rebuild the snapshot from ClinicalTrials.gov
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+
+      - name: Name the snapshot
+        run: |
+          tag="data-$(date -u +%Y-%m-%d)"
+          if gh release view "$tag" > /dev/null 2>&1; then
+            echo "::error::Release $tag already exists; snapshots are named by date, one per day."
+            exit 1
+          fi
+          echo "TAG=$tag" >> "$GITHUB_ENV"
+
+      - name: Extract from ClinicalTrials.gov
+        run: Rscript scripts/01_extract.R
+
+      - name: Build and validate the database
+        run: Rscript scripts/02_build_db.R
+
+      - name: Run tests
+        run: Rscript -e 'testthat::test_dir("tests/testthat", reporter = "summary", stop_on_failure = TRUE)'
+
+      # Before anything is published: this step fails if a finding no longer holds.
+      - name: Regenerate the README findings
+        run: |
+          echo "$TAG" > data/SNAPSHOT
+          Rscript scripts/03_findings.R
+
+      - name: Publish the data release
+        run: |
+          cd data
+          sha256sum trials.sqlite > trials.sqlite.sha256
+          gzip --keep --best trials.sqlite
+          cp raw/oncology/manifest.json manifest-oncology.json
+          cp raw/cardiovascular/manifest.json manifest-cardiovascular.json
+          cd ..
+          cat > notes.md <<EOF
+          Database snapshot built by the [refresh-data workflow](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+
+          - \`trials.sqlite.gz\`: the SQLite database the dashboard reads (gunzip before use)
+          - \`trials.sqlite.sha256\`: SHA-256 of the uncompressed database
+          - \`manifest-*.json\`: what was pulled for each area: filter, fields, study count and time
+
+          Data from ClinicalTrials.gov, U.S. National Library of Medicine.
+          EOF
+          gh release create "$TAG" data/trials.sqlite.gz data/trials.sqlite.sha256 \
+            data/manifest-oncology.json data/manifest-cardiovascular.json \
+            --title "Data snapshot $TAG" --notes-file notes.md
+
+      - name: Push a branch that points the app at the new snapshot
+        run: |
+          branch="data/$TAG"
+          git switch --create "$branch"
+          git add data/SNAPSHOT README.md
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit --message "Point the app at snapshot $TAG"
+          git push origin "$branch"
+          {
+            echo "### Snapshot $TAG published"
+            echo
+            echo "Open a pull request from \`$branch\` and merge it to deploy the new data:"
+            echo "${{ github.server_url }}/${{ github.repository }}/compare/main...$branch"
+          } >> "$GITHUB_STEP_SUMMARY"
