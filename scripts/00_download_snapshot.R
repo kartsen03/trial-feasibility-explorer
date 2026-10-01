@@ -30,7 +30,9 @@ repeat {
 close(input)
 close(output)
 
-actual <- as.character(openssl::sha256(file(staged)))
+# unclass: openssl's hash keeps its "hash" class through as.character(), and identical()
+# compares attributes as well as the hex.
+actual <- unclass(as.character(openssl::sha256(file(staged))))
 if (!identical(actual, expected)) {
   stop("checksum mismatch for ", tag, ": expected ", expected, ", got ", actual, call. = FALSE)
 }
