@@ -1,0 +1,32 @@
+# Secrets — never commit
+.Renviron
+.env
+.env.*
+!.env.example
+rsconnect/
+
+# R session / tooling
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Data — the raw API cache is reproducible from scripts/01_extract.R, and the built
+# database (127 MB) ships as a GitHub Release asset, not in git history
+data/raw/
+data/*.sqlite
+data/*.sqlite.gz
+data/*.sqlite-journal
+data/*.sqlite-wal
+data/*.sqlite-shm
+
+# Test / build output
+tests/testthat/_snaps/
+tests/testthat/*.sqlite
+
+# OS / editors
+.claude/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
