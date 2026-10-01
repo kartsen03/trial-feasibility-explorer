@@ -44,6 +44,7 @@ snapshot <- c(
 )
 
 build_database(tables, db_path, as.list(snapshot))
+validate_database(db_path, vapply(manifests, function(m) as.integer(m$n_studies), integer(1)))
 message(sprintf(
   "built %s: %d studies, %d area links, %d sites, %d conditions (%.1f MB)",
   db_path, nrow(tables$studies), nrow(tables$study_areas), nrow(tables$sites),

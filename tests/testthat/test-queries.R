@@ -87,6 +87,19 @@ test_that("filter values are bound as data, never spliced into SQL", {
   })
 })
 
+test_that("a consistent build passes validation", {
+  path <- build_fixture_db()
+  # Fixture: five unique oncology studies (one repeated across pages), two cardiovascular.
+  expect_true(validate_database(path, c(oncology = 5L, cardiovascular = 2L)))
+})
+
+test_that("validation fails when the stored studies don't match the API's count", {
+  path <- build_fixture_db()
+  expect_error(validate_database(path, c(oncology = 6L, cardiovascular = 2L)),
+               "oncology: 5 studies linked, but the API reported 6")
+  expect_error(validate_database(path, c(oncology = 5L)), "area that wasn't extracted")
+})
+
 test_that("SQL medians and quartiles match R's on random data", {
   set.seed(42)
   sizes <- c("Phase 1" = 7, "Phase 2" = 10, "Phase 3" = 1, "Phase 4" = 2)
