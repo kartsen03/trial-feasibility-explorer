@@ -1,0 +1,29 @@
+Package: trialfeasibility
+Title: Clinical Trial Feasibility Explorer
+Version: 0.1.0
+Authors@R: person("Karthik", "Sengupta", role = c("aut", "cre"))
+Description: An R Shiny dashboard over ClinicalTrials.gov data for the questions a
+    feasibility team asks when designing a study: enrollment, site counts, duration,
+    and how often and why trials stop early, by phase and therapeutic area. This file
+    declares dependencies for CI and deployment; the project is not an R package.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends:
+    R (>= 4.4.0)
+Imports:
+    bslib,
+    DBI,
+    DT,
+    ggiraph,
+    ggplot2,
+    htmltools,
+    httr2,
+    jsonlite,
+    openssl,
+    RSQLite,
+    scales,
+    shiny
+Suggests:
+    rsconnect,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
