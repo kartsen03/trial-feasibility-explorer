@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+          use-public-rspm: true
+
+      # Installs Imports and Suggests from DESCRIPTION, with system libraries.
+      - uses: r-lib/actions/setup-r-dependencies@v2
+
+      # Fixtures only: the suite needs no network, credentials or built database.
+      - name: Run tests
+        run: |
+          Rscript -e '
+            reporter <- testthat::MultiReporter$new(list(
+              testthat::SummaryReporter$new(),
+              testthat::JunitReporter$new(file = file.path(getwd(), "test-results.xml"))
+            ))
+            testthat::test_dir("tests/testthat", reporter = reporter, stop_on_failure = TRUE)
+          '
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-results
+          path: test-results.xml
