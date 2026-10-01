@@ -1,0 +1,50 @@
+{
+  "studies": [
+    {
+      "protocolSection": {
+        "identificationModule": { "nctId": "NCT90000002", "briefTitle": "Terminated phase 1/2, month-precision dates (repeated on a later page)" },
+        "statusModule": {
+          "overallStatus": "TERMINATED",
+          "whyStopped": "Low Accrual",
+          "startDateStruct": { "date": "2012-08", "type": "ACTUAL" },
+          "primaryCompletionDateStruct": { "date": "2013-02", "type": "ACTUAL" }
+        },
+        "sponsorCollaboratorsModule": { "leadSponsor": { "name": "University Cancer Center", "class": "OTHER" } },
+        "conditionsModule": { "conditions": ["Melanoma"] },
+        "designModule": { "studyType": "INTERVENTIONAL", "phases": ["PHASE1", "PHASE2"], "enrollmentInfo": { "count": 4, "type": "ACTUAL" } },
+        "contactsLocationsModule": {
+          "locations": [ { "facility": "University Cancer Center", "city": "Houston", "state": "Texas", "country": "United States" } ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": { "nctId": "NCT90000004", "briefTitle": "Withdrawn device trial, phase not applicable, zero enrollment" },
+        "statusModule": {
+          "overallStatus": "WITHDRAWN",
+          "whyStopped": "Business decision. No safety concerns contributed to this decision.",
+          "startDateStruct": { "date": "2019-05", "type": "ESTIMATED" }
+        },
+        "sponsorCollaboratorsModule": { "leadSponsor": { "name": "Device Co", "class": "INDUSTRY" } },
+        "conditionsModule": { "conditions": ["Colorectal Cancer"] },
+        "designModule": { "studyType": "INTERVENTIONAL", "phases": ["NA"], "enrollmentInfo": { "count": 0, "type": "ACTUAL" } }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": { "nctId": "NCT90000006", "briefTitle": "Cardio-oncology trial present in both areas" },
+        "statusModule": {
+          "overallStatus": "COMPLETED",
+          "startDateStruct": { "date": "2016-01-15", "type": "ACTUAL" },
+          "primaryCompletionDateStruct": { "date": "2016-07-15", "type": "ACTUAL" }
+        },
+        "sponsorCollaboratorsModule": { "leadSponsor": { "name": "Heart Institute" } },
+        "conditionsModule": { "conditions": ["Cardiotoxicity", "Lymphoma"] },
+        "designModule": { "studyType": "INTERVENTIONAL", "phases": ["PHASE2"], "enrollmentInfo": { "count": 40, "type": "ACTUAL" } },
+        "contactsLocationsModule": {
+          "locations": [ { "facility": "Heart Institute", "city": "Toronto", "state": "Ontario", "country": "Canada" } ]
+        }
+      }
+    }
+  ]
+}

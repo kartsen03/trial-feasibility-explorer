@@ -1,0 +1,57 @@
+{
+  "totalCount": 5,
+  "nextPageToken": "page2token",
+  "studies": [
+    {
+      "protocolSection": {
+        "identificationModule": { "nctId": "NCT90000001", "briefTitle": "Completed phase 3, three sites, day-precision dates" },
+        "statusModule": {
+          "overallStatus": "COMPLETED",
+          "startDateStruct": { "date": "2015-03-02", "type": "ACTUAL" },
+          "primaryCompletionDateStruct": { "date": "2017-03-02", "type": "ACTUAL" }
+        },
+        "sponsorCollaboratorsModule": { "leadSponsor": { "name": "Example Pharma", "class": "INDUSTRY" } },
+        "conditionsModule": { "conditions": ["Breast Cancer", "Metastatic Breast Cancer"] },
+        "designModule": { "studyType": "INTERVENTIONAL", "phases": ["PHASE3"], "enrollmentInfo": { "count": 300, "type": "ACTUAL" } },
+        "contactsLocationsModule": {
+          "locations": [
+            { "facility": "General Hospital", "city": "Boston", "state": "Massachusetts", "country": "United States" },
+            { "facility": "General Hospital", "city": "Boston", "state": "Massachusetts", "country": "United States" },
+            { "facility": "Hopital Central", "city": "Lyon", "country": "France" }
+          ]
+        }
+      },
+      "derivedSection": { "conditionBrowseModule": { "meshes": [{ "id": "D001943", "term": "Breast Neoplasms" }] } }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": { "nctId": "NCT90000002", "briefTitle": "Terminated phase 1/2, month-precision dates" },
+        "statusModule": {
+          "overallStatus": "TERMINATED",
+          "whyStopped": "Low Accrual",
+          "startDateStruct": { "date": "2012-08", "type": "ACTUAL" },
+          "primaryCompletionDateStruct": { "date": "2013-02", "type": "ACTUAL" }
+        },
+        "sponsorCollaboratorsModule": { "leadSponsor": { "name": "University Cancer Center", "class": "OTHER" } },
+        "conditionsModule": { "conditions": ["Melanoma"] },
+        "designModule": { "studyType": "INTERVENTIONAL", "phases": ["PHASE1", "PHASE2"], "enrollmentInfo": { "count": 4, "type": "ACTUAL" } },
+        "contactsLocationsModule": {
+          "locations": [ { "facility": "University Cancer Center", "city": "Houston", "state": "Texas", "country": "United States" } ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": { "nctId": "NCT90000003", "briefTitle": "Recruiting, estimated enrollment, no sites listed" },
+        "statusModule": {
+          "overallStatus": "RECRUITING",
+          "startDateStruct": { "date": "2024-01-10", "type": "ACTUAL" },
+          "primaryCompletionDateStruct": { "date": "2027-06", "type": "ESTIMATED" }
+        },
+        "sponsorCollaboratorsModule": { "leadSponsor": { "name": "Example Pharma", "class": "INDUSTRY" } },
+        "conditionsModule": { "conditions": ["Lung Cancer"] },
+        "designModule": { "studyType": "INTERVENTIONAL", "phases": ["PHASE2"], "enrollmentInfo": { "count": 120, "type": "ESTIMATED" } }
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "totalCount": 2,
+  "studies": [
+    {
+      "protocolSection": {
+        "identificationModule": { "nctId": "NCT90000006", "briefTitle": "Cardio-oncology trial present in both areas" },
+        "statusModule": {
+          "overallStatus": "COMPLETED",
+          "startDateStruct": { "date": "2016-01-15", "type": "ACTUAL" },
+          "primaryCompletionDateStruct": { "date": "2016-07-15", "type": "ACTUAL" }
+        },
+        "sponsorCollaboratorsModule": { "leadSponsor": { "name": "Heart Institute" } },
+        "conditionsModule": { "conditions": ["Cardiotoxicity", "Lymphoma"] },
+        "designModule": { "studyType": "INTERVENTIONAL", "phases": ["PHASE2"], "enrollmentInfo": { "count": 40, "type": "ACTUAL" } },
+        "contactsLocationsModule": {
+          "locations": [ { "facility": "Heart Institute", "city": "Toronto", "state": "Ontario", "country": "Canada" } ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": { "nctId": "NCT90000005", "briefTitle": "Sparse record: no phase, no enrollment, no completion date" },
+        "statusModule": {
+          "overallStatus": "UNKNOWN",
+          "startDateStruct": { "date": "2011-11" }
+        },
+        "sponsorCollaboratorsModule": { "leadSponsor": { "name": "Small Clinic", "class": "OTHER" } },
+        "designModule": { "studyType": "INTERVENTIONAL" }
+      }
+    }
+  ]
+}
