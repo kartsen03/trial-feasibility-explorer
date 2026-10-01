@@ -76,8 +76,9 @@ ui <- page_navbar(
     multi_select("phases", "Phase", PHASE_CHOICES),
     multi_select("statuses", "Overall status", labelled_choices(CHOICES$statuses, STATUS_LABELS)),
     multi_select("sponsor_classes", "Lead sponsor", labelled_choices(CHOICES$sponsor_classes, SPONSOR_CLASS_LABELS)),
+    # No tick labels: at sidebar width the last two collide, and the handles show the years.
     sliderInput("years", "Start year", min = CHOICES$years[[1]], max = CHOICES$years[[2]],
-                value = CHOICES$years, step = 1, sep = ""),
+                value = CHOICES$years, step = 1, sep = "", ticks = FALSE),
     actionButton("reset", "Reset filters", class = "btn-sm btn-outline-secondary"),
     hr(),
     p(class = "snapshot", snapshot_note)
