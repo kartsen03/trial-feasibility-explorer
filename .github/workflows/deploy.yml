@@ -42,7 +42,11 @@ jobs:
           r-version: release
           use-public-rspm: true
 
+      # cpp11 is a build-time (LinkingTo) dependency of RSQLite and others. Binary
+      # installs skip it, but rsconnect's renv snapshot refuses to run without it.
       - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::cpp11
 
       # The database is a release asset, not part of git history; data/SNAPSHOT names it.
       - name: Download the pinned data snapshot
